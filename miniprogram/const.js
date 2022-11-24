@@ -31,4 +31,4 @@ export const CONTURY_MAP = {
 	"USA": "美国",
 	"URU": "乌拉圭",
 	"WAL": "威尔士"
-}
+};

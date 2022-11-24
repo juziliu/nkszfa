@@ -18,7 +18,7 @@
     "list": [
       {
         "pagePath": "pages/dailyQuiz/index",
-        "text": "竞猜",
+        "text": "预测",
         "iconPath": "images/fire.png",
         "selectedIconPath": "images/fire_selected.png"
       },
@@ -37,5 +37,8 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "useExtendedLib": {
+    "weui": true
+  }
 }
