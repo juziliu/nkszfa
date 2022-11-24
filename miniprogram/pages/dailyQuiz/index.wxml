@@ -1,36 +1,39 @@
 <!-- index.wxml -->
 <view class="container">
   <scroll-view class="game-list">
+    <view class="tips">提示：每日比赛预测将在第一场比赛开始前截止提交</view>
     <view wx:for="{{gameList}}" wx:key="gameId" class="game-item">
       <view class="game-info">
         <view class="game-time">{{item.gameTime}}</view>
         <view class="team-group">{{item.groupInfo}}</view>
-        <view></view>
+        <view wx:if="{{hasSubmit}}"class="game-status submit"> ✅ 已预测</view>
+        <view wx:else  class="game-status"> - 预测中</view>
       </view>
       <view class="game-detail">
         <view class="team">
           <view class="team-info">
             <image src="cloud://nkszfa-9gtjn1wxa3e9d34f.6e6b-nkszfa-9gtjn1wxa3e9d34f-1315281859/{{item.teamA}}.png" class="team-img"></image>
-            <view class="team-name">{{item.teamA}}</view>
+            <view class="team-name">{{conturyMap[item.teamA]}}</view>
           </view>
           <view class="team-goal">{{item.teamA.teamGoal}}</view>
         </view>
         <view class="game-result">
-          <input class="goal-input" value="0" type="number" />
+          <view wx:if="{{hasSubmit}}" class="goal-result">{{quizMap[item.gameId + 'teamA']}}</view>
+          <input id="{{item.gameId + 'teamA'}}" wx:else class="goal-input" value="0" type="number" bindinput="inputGoal" />
           <view class="vs">-</view>
-          <input class="goal-input" value="0" type="number" />
+          <view wx:if="{{hasSubmit}}" class="goal-result">{{quizMap[item.gameId + 'teamB']}}</view>
+          <input id="{{item.gameId + 'teamB'}}" wx:else class="goal-input" value="0" type="number" bindinput="inputGoal"/>
         </view>
         <view class="team">
           <view class="team-goal">{{item.teamB.teamGoal}}</view>
           <view class="team-info">
             <image src="cloud://nkszfa-9gtjn1wxa3e9d34f.6e6b-nkszfa-9gtjn1wxa3e9d34f-1315281859/{{item.teamB}}.png" class="team-img"></image>
-            <view class="team-name">{{item.teamB}}</view>
+            <view class="team-name">{{conturyMap[item.teamB]}}</view>
           </view>
         </view>
       </view>
-      <view class="quiz-action">
-        <button size="mini" type="primary">提交</button>
-      </view>
     </view>
+    <button type="primary" bind:tap="setAndSaveQuizMap" style="margin: 40px auto;" disabled="{{hasSubmit}}">提交</button>
+
   </scroll-view>
 </view>

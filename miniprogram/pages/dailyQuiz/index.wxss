@@ -12,6 +12,7 @@
 }
 
 .game-info {
+  margin: 0 20px 0 10px;
   font-size: 12px;
 }
 
@@ -28,6 +29,7 @@
   font-size: 18px;
   font-weight: bold;
   color: #ccc;
+  margin: 0 5px;
 }
 
 .game-result {
@@ -35,8 +37,25 @@
   align-items: center;
 }
 
+.game-status {
+  color: #ccc;
+  bottom: 0;
+}
+
+.submit {
+  color: rgb(0, 158, 0);
+}
+
 .goal-input {
   width: 30px;
+  height: 25px;
+  text-align: center;
+  border: 1px #000 dotted;
+}
+
+.goal-result {
+  width: 30px;
+  height: 25px;
   text-align: center;
   border: 1px #000 solid;
 }
@@ -55,6 +74,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  width: 60px;
 }
 
 .team-img {
@@ -64,4 +85,9 @@
 
 .btn {
   width: 50px;
+}
+
+.tips {
+  color: #1677ff;
+  text-align: center;
 }

@@ -7,8 +7,44 @@ App({
       wx.cloud.init({
         traceUser: true,
       });
+
+      wx.cloud.callFunction({
+        name: 'getOpenId',
+        complete: res => {
+          const { openid } = res.result;
+          this.globalData.openid = openid;
+          wx.cloud.database().collection('user').where({ openid }).get().then(res => {
+            if (res.data.length !== 0) {
+              const { nickName, avatarUrl } = res.data[0];
+              this.globalData.nickName = nickName;
+              this.globalData.avatarUrl = avatarUrl;
+            }
+          })
+        }
+      })
     }
 
-    this.globalData = {};
+    this.globalData = {
+      openid: '',
+      nickName: '',
+      avatarUrl: '',
+    };
+  },
+
+  updateUserInfo(userInfo) {
+    const { nickName, avatarUrl } = userInfo;
+    this.globalData.nickName = nickName;
+    this.globalData.avatarUrl = avatarUrl;
+    wx.cloud.database().collection('user').add({
+      data: {
+        nickName,
+        avatarUrl,
+        role: 'user',
+        openid: this.globalData.openid,
+      }
+    }).then(res => {
+      console.log('success', res);
+    })
   }
+
 });
