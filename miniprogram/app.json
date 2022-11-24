@@ -1,24 +1,40 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/getOpenId/index",
-    "pages/getMiniProgramCode/index",
-    "pages/deployService/index",
-    "pages/createCollection/index",
-    "pages/uploadFile/index",
-    "pages/selectRecord/index",
-    "pages/updateRecord/index",
-    "pages/updateRecordResult/index",
-    "pages/updateRecordSuccess/index",
-    "pages/sumRecord/index",
-    "pages/sumRecordResult/index"
+    "pages/dailyQuiz/index",
+    "pages/championRoad/index",
+    "pages/my/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "nksz世界杯小助手",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "black",
+    "backgroundColor": "white",
+    "selectedColor": "#4096ff",
+    "list": [
+      {
+        "pagePath": "pages/dailyQuiz/index",
+        "text": "竞猜",
+        "iconPath": "images/fire.png",
+        "selectedIconPath": "images/fire_selected.png"
+      },
+      {
+        "pagePath": "pages/championRoad/index",
+        "text": "冠军之路",
+        "iconPath": "images/trophy.png",
+        "selectedIconPath": "images/trophy_selected.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "images/me.png",
+        "selectedIconPath": "images/me_selected.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
