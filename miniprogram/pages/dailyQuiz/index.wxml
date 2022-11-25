@@ -1,7 +1,8 @@
 <!-- index.wxml -->
 <view class="container">
   <scroll-view class="game-list">
-    <view class="tips">提示：每日比赛预测将在第一场比赛开始前截止提交</view>
+    <view class="tips">规则：1.每人每天只有一次预测机会，在每日第一场比赛开始前截止提交。</view>
+    <view class="tips">2.猜中胜负平积一分，猜中比分额外积一分。</view>
     <view wx:for="{{gameList}}" wx:key="gameId" class="game-item">
       <view class="game-info">
         <view class="game-time">{{item.gameTime}}</view>

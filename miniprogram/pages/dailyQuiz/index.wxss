@@ -90,4 +90,6 @@
 .tips {
   color: #1677ff;
   text-align: center;
+  font-size: 12px;
+  text-align: left;
 }
