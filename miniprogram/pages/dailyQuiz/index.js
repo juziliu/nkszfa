@@ -8,8 +8,9 @@ Page({
    */
   data: {
     isLoading: true,
+    isEnd: true,
     round: -1,
-    isSubmit: false,
+    hasSubmit: false,
     gameList: [],
     quizMap: {},
     conturyMap: CONTURY_MAP,
@@ -17,9 +18,13 @@ Page({
 
   onLoad() {
     this.initCloudDb();
-    this.initGameList();
   },
 
+  onShow() {
+    this.initGameList();
+    this.checkQuizIsEnd();
+  },
+  
   initCloudDb() {
     this.db = wx.cloud.database();
   },
@@ -46,7 +51,7 @@ Page({
         });
         this.setData({
           quizMap,
-          isSubmit: false,
+          hasSubmit: false,
           isLoading: false,
         });
       }
@@ -58,8 +63,28 @@ Page({
     return Boolean(nickName);
   },
 
+  checkQuizIsEnd() {
+    return this.db.collection('const').where({ _id: 'isEnd' }).get().then(res => {
+      const { value: isEnd } = res.data[0];
+      this.setData({
+        isEnd,
+      });
+      return isEnd;
+    });
+  },
+
+  checkAndQuiz() {
+    this.checkQuizIsEnd().then((res) => {
+      if (!res) {
+        this.setAndSaveQuizMap();
+      } else {
+        wx.showToast({ icon: 'error', title: '已到截止时间' });
+      }
+    });
+  },
+
   setAndSaveQuizMap() {
-    if (this.checkIsLogin()) {
+    if (this.checkIsLogin() && !this.data.isEnd) {
       const { openid } = app.globalData;
       this.db.collection('quiz').add({
         data: {
@@ -92,7 +117,6 @@ Page({
 
   initGameList() {
     this.db.collection('const').where({ _id: 'quizRound' }).get().then(res => {
-      console.log(res);
       const { value: round } = res.data[0];
       this.round = round;
       this.db.collection('game').where({ round }).get().then(res => {

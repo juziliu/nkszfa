@@ -7,8 +7,10 @@
       <view class="game-info">
         <view class="game-time">{{item.gameTime}}</view>
         <view class="team-group">{{item.groupInfo}}</view>
-        <view wx:if="{{hasSubmit}}" class="game-status submit">✅ 已预测</view>
-        <view wx:else class="game-status">- 预测中</view>
+        <view wx:if="{{isLoading}}" />
+        <view wx:elif="{{hasSubmit}}" class="game-status submit">✅ 已预测</view>
+        <view wx:elif="{{!isEnd}}" class="game-status">- 预测中</view>
+        <view wx:else class="game-status" style="color: red;">已截止</view>
       </view>
       <view class="game-detail">
         <view class="team">
@@ -34,7 +36,7 @@
         </view>
       </view>
     </view>
-    <button wx:if="{{!isLoading}}" type="primary" bind:tap="setAndSaveQuizMap" style="margin: 40px auto;" disabled="{{hasSubmit}}">
+    <button wx:if="{{!isLoading && !isEnd}}" type="primary" bind:tap="checkAndQuiz" style="margin: 40px auto;" disabled="{{hasSubmit}}">
       提交
     </button>
   </scroll-view>
