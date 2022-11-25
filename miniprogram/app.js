@@ -15,9 +15,10 @@ App({
           this.globalData.openid = openid;
           wx.cloud.database().collection('user').where({ openid }).get().then(res => {
             if (res.data.length !== 0) {
-              const { nickName, avatarUrl } = res.data[0];
+              const { nickName, avatarUrl, realName } = res.data[0];
               this.globalData.nickName = nickName;
               this.globalData.avatarUrl = avatarUrl;
+              this.globalData.realName = realName;
             }
           })
         }
@@ -28,6 +29,7 @@ App({
       openid: '',
       nickName: '',
       avatarUrl: '',
+      realName: '',
     };
   },
 
@@ -44,7 +46,25 @@ App({
       }
     }).then(res => {
       console.log('success', res);
-    })
+    });
+  },
+
+  updateRealName(realName) {
+    if (realName) {
+      this.globalData.realName = realName;
+      wx.cloud.database().collection('user').where({
+        openid: this.globalData.openid,
+      }).update({
+        data: {
+          realName,
+        }
+      }).then(res => {
+        console.log('realName setSuccess', res);
+        wx.showToast({
+          title: '提交成功',
+        });
+      });
+    }
   }
 
 });

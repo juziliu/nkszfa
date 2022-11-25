@@ -1,2 +1,29 @@
 <!-- index.wxml -->
-<view class="container">暂未开启，敬请期待</view>
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{nickName}}">
+      <image class="userinfo-avatar" src="{{avatarUrl}}" />
+      <view class="userinfo-name">{{realName || nickName}}</view>
+      <view class="userinfo-score">
+        <view>用户积分</view>
+        <view class="score">{{score}}</view>
+      </view>
+    </block>
+    <block wx:else>
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile">获取头像昵称</button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        获取头像昵称
+      </button>
+    </block>
+  </view>
+  <view class="user-action" bindtap="gotoRankPage">
+    <image src="../../images/rank.png" mode="widthFix" class="action-icon" />
+    <view>查询排行</view>
+    <view class="goto-icon">>></view>
+  </view>
+  <view class="user-action" bindtap="gotoQuizHistoryPage">
+    <image src="../../images/note.png" mode="widthFix" class="action-icon" />
+    <view>预测记录</view>
+    <view class="goto-icon">>></view>
+  </view>
+</view>

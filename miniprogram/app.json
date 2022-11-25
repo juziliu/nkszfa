@@ -23,12 +23,6 @@
         "selectedIconPath": "images/fire_selected.png"
       },
       {
-        "pagePath": "pages/championRoad/index",
-        "text": "冠军之路",
-        "iconPath": "images/trophy.png",
-        "selectedIconPath": "images/trophy_selected.png"
-      },
-      {
         "pagePath": "pages/my/index",
         "text": "我的",
         "iconPath": "images/me.png",
