@@ -33,7 +33,7 @@ App({
     };
   },
 
-  updateUserInfo(userInfo) {
+  updateUserInfo(userInfo, cb) {
     const { nickName, avatarUrl } = userInfo;
     this.globalData.nickName = nickName;
     this.globalData.avatarUrl = avatarUrl;
@@ -46,6 +46,9 @@ App({
       }
     }).then(res => {
       console.log('success', res);
+      if (cb) {
+        cb();
+      }
     });
   },
 

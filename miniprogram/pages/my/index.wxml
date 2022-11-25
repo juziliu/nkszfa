@@ -10,10 +10,7 @@
       </view>
     </block>
     <block wx:else>
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile">获取头像昵称</button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
-        获取头像昵称
-      </button>
+      <button bindtap="getUserProfile">获取头像昵称</button>
     </block>
   </view>
   <view class="user-action" bindtap="gotoRankPage">

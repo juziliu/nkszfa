@@ -80,10 +80,13 @@ Page({
     } else {
       wx.getUserProfile({
         desc: '请先登录再进行预测',
-        success: function (res) {
-          app.updateUserInfo(res.userInfo);
+        success: (res) => {
+          app.updateUserInfo(res.userInfo, this.setAndSaveQuizMap.bind(this));
+        },
+        fail: () => {
+          wx.showToast({ title: '请先授权', icon: 'error' });
         }
-      })
+      });
     }
   },
 
