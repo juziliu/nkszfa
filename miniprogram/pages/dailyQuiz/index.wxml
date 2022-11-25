@@ -6,8 +6,8 @@
       <view class="game-info">
         <view class="game-time">{{item.gameTime}}</view>
         <view class="team-group">{{item.groupInfo}}</view>
-        <view wx:if="{{hasSubmit}}"class="game-status submit"> ✅ 已预测</view>
-        <view wx:else  class="game-status"> - 预测中</view>
+        <view wx:if="{{hasSubmit}}" class="game-status submit">✅ 已预测</view>
+        <view wx:else class="game-status">- 预测中</view>
       </view>
       <view class="game-detail">
         <view class="team">
@@ -22,7 +22,7 @@
           <input id="{{item.gameId + 'teamA'}}" wx:else class="goal-input" value="0" type="number" bindinput="inputGoal" />
           <view class="vs">-</view>
           <view wx:if="{{hasSubmit}}" class="goal-result">{{quizMap[item.gameId + 'teamB']}}</view>
-          <input id="{{item.gameId + 'teamB'}}" wx:else class="goal-input" value="0" type="number" bindinput="inputGoal"/>
+          <input id="{{item.gameId + 'teamB'}}" wx:else class="goal-input" value="0" type="number" bindinput="inputGoal" />
         </view>
         <view class="team">
           <view class="team-goal">{{item.teamB.teamGoal}}</view>
@@ -33,7 +33,8 @@
         </view>
       </view>
     </view>
-    <button type="primary" bind:tap="setAndSaveQuizMap" style="margin: 40px auto;" disabled="{{hasSubmit}}">提交</button>
-
+    <button wx:if="{{!isLoading}}" type="primary" bind:tap="setAndSaveQuizMap" style="margin: 40px auto;" disabled="{{hasSubmit}}">
+      提交
+    </button>
   </scroll-view>
 </view>

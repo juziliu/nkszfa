@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoading: true,
     round: -1,
     isSubmit: false,
     gameList: [],
@@ -35,6 +36,7 @@ Page({
         this.setData({
           quizMap,
           hasSubmit: true,
+          isLoading: false,
         });
       } else {
         const quizMap = {};
@@ -45,6 +47,7 @@ Page({
         this.setData({
           quizMap,
           isSubmit: false,
+          isLoading: false,
         });
       }
     });
