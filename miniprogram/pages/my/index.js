@@ -7,6 +7,8 @@ Page({
     nickName: '',
     avatarUrl: '',
     realName: '',
+    isEnd: false,
+    isAdmin: false,
     score: 0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
@@ -20,13 +22,24 @@ Page({
   },
   onLoad() {
     this.initUserInfo();
+    this.checkQuizIsEnd();
+  },
+  checkQuizIsEnd() {
+    return wx.cloud.database().collection('const').where({ _id: 'isEnd' }).get().then(res => {
+      const { value: isEnd } = res.data[0];
+      this.setData({
+        isEnd,
+      });
+      return isEnd;
+    });
   },
   initUserInfo() {
-    const { nickName, avatarUrl, realName } = app.globalData;
+    const { nickName, avatarUrl, realName, role } = app.globalData;
     this.setData({
       nickName,
       avatarUrl,
       realName,
+      isAdmin: role === 'admin',
     });
   },
   getUserProfile(e) {
@@ -67,5 +80,16 @@ Page({
   },
   gotoQuizHistoryPage() {
     wx.showToast({ icon: 'none', title: '即将上线' });
+  },
+  switchIsEnd() {
+    
+    wx.cloud.database().collection('const').where({ _id: 'isEnd' }).update({
+      data: {
+        value: !this.data.isEnd,
+      }
+    }).then((res) => {
+      console.log(res);
+      this.checkQuizIsEnd()
+    });
   }
 })

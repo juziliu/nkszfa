@@ -23,4 +23,9 @@
     <view>预测记录</view>
     <view class="goto-icon">>></view>
   </view>
+  <view wx:if="{{isAdmin}}" class="user-action" bindtap="switchIsEnd">
+    <image src="../../images/note.png" mode="widthFix" class="action-icon" />
+    <view>切换是否开始（目前状态{{isEnd}}）</view>
+    <view class="goto-icon">>></view>
+  </view>
 </view>

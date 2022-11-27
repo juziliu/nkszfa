@@ -15,10 +15,11 @@ App({
           this.globalData.openid = openid;
           wx.cloud.database().collection('user').where({ openid }).get().then(res => {
             if (res.data.length !== 0) {
-              const { nickName, avatarUrl, realName } = res.data[0];
+              const { nickName, avatarUrl, realName, role } = res.data[0];
               this.globalData.nickName = nickName;
               this.globalData.avatarUrl = avatarUrl;
               this.globalData.realName = realName;
+              this.globalData.role = role;
             }
           })
         }
@@ -30,6 +31,7 @@ App({
       nickName: '',
       avatarUrl: '',
       realName: '',
+      role: '',
     };
   },
 
