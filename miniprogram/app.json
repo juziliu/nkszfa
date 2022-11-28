@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/quizHistory/index",
     "pages/dailyQuiz/index",
+    "pages/quizHistory/index",
+
     "pages/championRoad/index",
     "pages/my/index"
   ],
