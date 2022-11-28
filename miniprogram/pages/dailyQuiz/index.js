@@ -31,6 +31,7 @@ Page({
 
   initQuizList(round, gameList) {
     const { openid } = app.globalData;
+    
     this.db.collection('quiz').where({
       round,
       userId: openid,
@@ -124,7 +125,11 @@ Page({
         this.setData({
           gameList,
         });
-        this.initQuizList(round, gameList);
+        if (!app.globalData.openid) {
+          app.getOpenidCallback = () => { this.initQuizList(round, gameList) };
+        } else {
+          this.initQuizList(round, gameList);
+        }
       });
     });
   },

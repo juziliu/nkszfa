@@ -2,7 +2,6 @@
   "pages": [
     "pages/dailyQuiz/index",
     "pages/quizHistory/index",
-
     "pages/championRoad/index",
     "pages/my/index"
   ],

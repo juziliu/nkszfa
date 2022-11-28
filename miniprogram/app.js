@@ -13,6 +13,10 @@ App({
         complete: res => {
           const { openid } = res.result;
           this.globalData.openid = openid;
+          if (this.getOpenidCallback) {
+            console.log('call openid callback')
+            this.getOpenidCallback();
+          }
           wx.cloud.database().collection('user').where({ openid }).get().then(res => {
             if (res.data.length !== 0) {
               const { nickName, avatarUrl, realName, role } = res.data[0];
