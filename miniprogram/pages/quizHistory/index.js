@@ -8,7 +8,7 @@ Page({
    */
   data: {
     isLoading: true,
-    isEnd: true,
+    isPlaying: false,
     hasSubmit: false,
     selectedRound: 1,
     allGameList: [],
@@ -83,15 +83,21 @@ Page({
 
   loadResult(round) {
     this.db.collection('gameResult').where({ round }).get().then(res => {
-      const currentGameResultList = JSON.parse(res.data[0].result);
-      this.setData({
-        currentGameResultList,
-      });
+      if (res.data[0]) {
+        const currentGameResultList = JSON.parse(res.data[0].result);
+        this.setData({
+          currentGameResultList,
+          isPlaying: false,
+        });
+      } else {
+        this.setData({
+          isPlaying: true,
+        });
+      }
     });
   },
 
   onTapRoundLabel(e) {
-    console.log(e);
     const { round } = e.currentTarget.dataset;
     const currentGameList = this.data.allGameList[round - 1]
     this.setData({
@@ -99,6 +105,7 @@ Page({
       selectedRound: round,
     })
     this.loadQuizList(round, currentGameList);
+    this.loadResult(round);
   },
 
   checkIsLogin() { 

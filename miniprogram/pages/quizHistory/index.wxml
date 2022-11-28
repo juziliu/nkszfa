@@ -12,8 +12,7 @@
         <view class="team-group">{{item.groupInfo}}</view>
         <view wx:if="{{isLoading}}" />
         <view wx:elif="{{hasSubmit}}" class="game-status submit">✅ 已预测</view>
-        <view wx:elif="{{!isEnd}}" class="game-status">- 预测中</view>
-        <view wx:else class="game-status" style="color: red;">已截止</view>
+        <view wx:else class="game-status" style="color: #ccc;">未预测</view>
       </view>
       <view class="game-detail">
         <view class="team">
@@ -23,19 +22,20 @@
           </view>
         </view>
         <view class="game-result-list">
-          <view class="game-result">
-            <view class="game-result-title">真实结果</view>
-            <view class="goal-result">{{quizMap[item.gameId + 'teamA']}}</view>
-            <view class="vs">-</view>
-            <view class="goal-result">{{quizMap[item.gameId + 'teamB']}}</view>
+          <view wx:if="{{!isPlaying}}" class="game-result">
+            <view class="game-result-title">比赛结果</view>
+            <view class="game-result">{{currentGameResultList[index].teamA}}</view>
+            <view class="vs game-result">-</view>
+            <view class="game-result">{{currentGameResultList[index].teamB}}</view>
           </view>
-          <view class="game-result">
-            <view class="game-quiz-title">预测结果</view>
-            <view wx:if="{{hasSubmit}}" class="goal-result">
+          <view wx:else class="game-result-title">本轮进行中</view>
+          <view wx:if="{{hasSubmit}}" class="game-result">
+            <view class="game-quiz-title">我的预测</view>
+            <view class="game-quiz">
               {{quizMap[item.gameId + 'teamA']}}
             </view>
-            <view class="vs">-</view>
-            <view wx:if="{{hasSubmit}}" class="goal-result">
+            <view class="vs game-quiz">-</view>
+            <view  class="game-quiz">
               {{quizMap[item.gameId + 'teamB']}}
             </view>
           </view>
