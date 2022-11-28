@@ -1,0 +1,116 @@
+.round-list {
+  width: 100%;
+  overflow: scroll;
+  white-space: nowrap;
+}
+
+.round-label {
+  width: 60px;
+  margin: 0 10px;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.selected {
+  border-bottom: 3px solid #4290fc;
+  color: #000;
+}
+
+.game-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+
+  margin: 15px 0;
+  padding: 0 5px;
+
+  background: white;
+}
+
+.game-info {
+  margin: 0 20px 0 10px;
+  font-size: 12px;
+}
+
+.game-detail {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  justify-content: space-between;
+  margin: 0 15px;
+}
+
+.vs {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ccc;
+  margin: 0 5px;
+}
+
+.game-result {
+  display: flex;
+  align-items: center;
+}
+
+.game-status {
+  color: #ccc;
+  bottom: 0;
+}
+
+.submit {
+  color: rgb(0, 158, 0);
+}
+
+.goal-input {
+  width: 30px;
+  height: 25px;
+  text-align: center;
+  border: 1px #000 dotted;
+}
+
+.goal-result {
+  width: 30px;
+  height: 25px;
+  text-align: center;
+  border: 1px #000 solid;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-name {
+  font-size: 14px;
+}
+
+.team {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+}
+
+.team-img {
+  width: 19px;
+  height: 13px;
+}
+
+.btn {
+  width: 50px;
+}
+
+.tips {
+  color: #1677ff;
+  text-align: center;
+  font-size: 12px;
+  text-align: left;
+}

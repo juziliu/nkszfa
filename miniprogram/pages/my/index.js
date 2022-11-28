@@ -79,7 +79,13 @@ Page({
     }
   },
   gotoQuizHistoryPage() {
-    wx.showToast({ icon: 'none', title: '即将上线' });
+    console.log('gotoQuizHistoryPage')
+    wx.navigateTo({
+      url: '/pages/quizHistory/index',
+      fail: (res) => {
+        console.log(res);
+      }
+    });
   },
   switchIsEnd() {
     
