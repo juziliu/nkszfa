@@ -31,13 +31,9 @@
           <view wx:else class="game-result-title">本轮进行中</view>
           <view wx:if="{{hasSubmit}}" class="game-result">
             <view class="game-quiz-title">我的预测</view>
-            <view class="game-quiz">
-              {{quizMap[item.gameId + 'teamA']}}
-            </view>
+            <view class="game-quiz">{{quizMap[item.gameId + 'teamA']}}</view>
             <view class="vs game-quiz">-</view>
-            <view  class="game-quiz">
-              {{quizMap[item.gameId + 'teamB']}}
-            </view>
+            <view class="game-quiz">{{quizMap[item.gameId + 'teamB']}}</view>
           </view>
         </view>
         <view class="team">
@@ -48,8 +44,8 @@
         </view>
       </view>
     </view>
-    <button wx:if="{{!isLoading && !isEnd}}" type="primary" bind:tap="checkAndQuiz" style="margin: 40px auto;" disabled="{{hasSubmit}}">
+    <!-- <button wx:if="{{!isLoading && !isEnd}}" type="primary" bind:tap="checkAndQuiz" style="margin: 40px auto;" disabled="{{hasSubmit}}">
       提交
-    </button>
+    </button> -->
   </scroll-view>
 </view>
