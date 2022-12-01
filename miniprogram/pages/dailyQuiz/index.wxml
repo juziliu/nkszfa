@@ -21,11 +21,11 @@
           <view class="team-goal">{{item.teamA.teamGoal}}</view>
         </view>
         <view class="game-result">
-          <view wx:if="{{hasSubmit}}" class="goal-result">{{quizMap[item.gameId + 'teamA']}}</view>
-          <input id="{{item.gameId + 'teamA'}}" wx:else class="goal-input" value="0" type="number" bindinput="inputGoal" />
+          <view wx:if="{{isEnd}}" class="goal-result">{{quizMap[item.gameId + 'teamA']}}</view>
+          <input id="{{item.gameId + 'teamA'}}" wx:else class="goal-input" value="{{quizMap[item.gameId + 'teamA']}}" type="number" bindinput="inputGoal" />
           <view class="vs">-</view>
-          <view wx:if="{{hasSubmit}}" class="goal-result">{{quizMap[item.gameId + 'teamB']}}</view>
-          <input id="{{item.gameId + 'teamB'}}" wx:else class="goal-input" value="0" type="number" bindinput="inputGoal" />
+          <view wx:if="{{isEnd}}" class="goal-result">{{quizMap[item.gameId + 'teamB']}}</view>
+          <input id="{{item.gameId + 'teamB'}}" wx:else class="goal-input" value="{{quizMap[item.gameId + 'teamB']}}" type="number" bindinput="inputGoal" />
         </view>
         <view class="team">
           <view class="team-goal">{{item.teamB.teamGoal}}</view>
@@ -36,8 +36,11 @@
         </view>
       </view>
     </view>
-    <button wx:if="{{!isLoading && !isEnd}}" type="primary" bind:tap="checkAndQuiz" style="margin: 40px auto;" disabled="{{hasSubmit}}">
+    <button wx:if="{{!isLoading && !isEnd && !hasSubmit}}" type="primary" bind:tap="checkAndQuiz" style="margin: 40px auto;">
       提交
+    </button>
+    <button wx:elif="{{!isLoading && !isEnd}}" type="primary" bind:tap="checkAndQuiz" style="margin: 40px auto;">
+      修改
     </button>
   </scroll-view>
 </view>

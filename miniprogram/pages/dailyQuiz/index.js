@@ -25,6 +25,14 @@ Page({
     this.checkQuizIsEnd();
   },
   
+  onShareAppMessage() {
+    return {
+      title: '一起来预测',
+      path: '/pages/dailyQuiz/index',
+      imageUrl: '/images/world_cup.jpg',
+    };
+  },
+  
   initCloudDb() {
     this.db = wx.cloud.database();
   },
@@ -84,24 +92,61 @@ Page({
     });
   },
 
+  newQuizResult() {
+    const { openid } = app.globalData;
+    this.db.collection('quiz').add({
+      data: {
+        userId: openid,
+        round: this.round,
+        quizMap: JSON.stringify(this.data.quizMap),
+      }
+    }).then(res => {
+      console.log('quiz success', res);
+      wx.showToast({
+        title: '提交成功',
+      });
+      this.setData({
+        hasSubmit: true,
+        quizMap: this.data.quizMap,
+      });
+    });
+  },
+
+  updateQuizResult() {
+    const { openid } = app.globalData;
+    this.db.collection('quiz').where({
+      userId: openid,
+      round: this.round,
+    }).update({
+      data: {
+        userId: openid,
+        round: this.round,
+        quizMap: JSON.stringify(this.data.quizMap),
+      }
+    }).then(res => {
+      console.log('quiz success', res);
+      wx.showToast({
+        title: '修改成功',
+      });
+      this.setData({
+        hasSubmit: true,
+        quizMap: this.data.quizMap,
+      });
+    });
+  },
+
   setAndSaveQuizMap() {
     if (this.checkIsLogin() && !this.data.isEnd) {
       const { openid } = app.globalData;
-      this.db.collection('quiz').add({
-        data: {
-          userId: openid,
-          round: this.round,
-          quizMap: JSON.stringify(this.data.quizMap),
+      this.db.collection('quiz').where({
+        userId: openid,
+        round: this.round,
+      }).get().then(res => {
+        if (res.data[0]) {
+          this.updateQuizResult();
+        } else {
+          this.newQuizResult();
         }
-      }).then(res => {
-        console.log('quiz success', res);
-        wx.showToast({
-          title: '提交成功',
-        });
-        this.setData({
-          hasSubmit: true,
-          quizMap: this.data.quizMap,
-        });
       });
     } else {
       wx.getUserProfile({
@@ -149,6 +194,7 @@ Page({
       };
     } else {
       quizMap[id] = goal;
+      this.setData({ quizMap });
       return {
         value: goal,
       }
