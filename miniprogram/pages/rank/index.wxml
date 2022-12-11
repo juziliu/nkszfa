@@ -1,0 +1,27 @@
+<!-- index.wxml -->
+<view class="container">
+  <view class="banner">
+    <view class="second">
+      <image class="avatar" src="{{rankList[1].avatarUrl}}"></image>
+      <view class="name">🥈{{rankList[1].realName}}</view>
+    </view>
+    <view class="first">
+      <image class="avatar" src="{{rankList[0].avatarUrl}}"></image>
+      <view class="name">🥇{{rankList[0].realName}}</view>
+    </view>
+    <view class="third">
+      <image class="avatar" src="{{rankList[2].avatarUrl}}"></image>
+      <view class="name">🥉{{rankList[2].realName}}</view>
+    </view>
+  </view>
+  <scroll-view class="rank-list" scroll-y="{{true}}">
+    <view wx:for="{{rankList}}" wx:key="userId" class="rank-user">
+      <image class="avatar" src="{{item.avatarUrl}}">
+        <view class="index">{{index + 1}}</view>
+      </image>
+      <view class="name">{{item.realName}}</view>
+      <view class="text">累计积分：</view>
+      <view class="score">{{item.score}}</view>
+    </view>
+  </scroll-view>
+</view>

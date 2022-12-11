@@ -28,7 +28,7 @@ const getMatchScore = (resObj, quizMap) => {
   }
 
   return 0;
- }
+}
 
 const getRoundScore = (result, quiz, round) => {
   const resultList = JSON.parse(result.result);
@@ -59,22 +59,23 @@ exports.main = async (event, context) => {
   console.log('gameList', gameResult);
 
   const userPromiseMap = users.map(async user => {
-    const { openid, realName } = user;
-    if (realName) { 
-      let score = 0;  
+    const { openid, realName, avatarUrl } = user;
+    if (realName) {
+      let score = 0;
       const { data: userQuizList } = await db.collection('quiz').where({ userId: openid }).get();
       console.log('now is', realName, userQuizList);
       userQuizList.forEach(userQuiz => {
         const { round, quizMap } = userQuiz;
         console.log('round is ', round);
-        if (round < 11) { 
-              score += getRoundScore(gameResult[round - 1], quizMap, round);
-        console.log('round score is', score);
+        if (round < 15) {
+          score += getRoundScore(gameResult[round - 1], quizMap, round);
+          console.log('round score is', score);
         }
       });
-      console.log(realName ,'finish ', score);
+      console.log(realName, 'finish ', score);
       userScoreList.push({
         realName,
+        avatarUrl,
         score,
         userId: openid,
       });

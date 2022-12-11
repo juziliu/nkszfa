@@ -1,0 +1,101 @@
+.container {
+  height: 100vh;
+  background: rgba(64, 185, 255, 0.8);
+}
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  width: 100%;
+}
+
+.rank-list {
+  height: calc(100vh - 160px);
+  border-radius: 12px 12px 0 0;
+  overflow: scroll;
+  background: white;
+  padding-top: 15px;
+}
+
+.first {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.first .avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 20px;
+  border-radius: 50%;
+  border: gold 4px solid;
+}
+
+.first .name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.second .avatar {
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
+  border-radius: 50%;
+  border: silver 3px solid;
+}
+
+.third .avatar {
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
+  border-radius: 50%;
+  border: rgb(198, 145, 69) 3px solid;
+}
+
+.rank-user {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 0;
+  margin: 0 15px;
+  border-bottom: #eeeeee 1px solid;
+}
+
+.index {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  font-size: 8px;
+  color: white;
+  text-align: center;
+  background: rgb(255, 187, 99);
+  border-radius: 0 0 50% 0;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  position: relative;
+}
+
+.name {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.text {
+  font-size: 16px;
+  color: #cccccc;
+}
+
+.score {
+  font-size: 16px;
+  color: #4096ff;
+}
