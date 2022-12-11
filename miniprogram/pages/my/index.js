@@ -69,17 +69,21 @@ Page({
             if (content) {
               app.updateRealName(res.content);
             } else {
-              wx.showToast({ icon: 'error', title: '姓名校验不合法'});
+              wx.showToast({ icon: 'error', title: '姓名校验不合法' });
             }
           }
         }
       })
     } else {
-      wx.showToast({ icon: 'none', title: '即将上线' });
+      wx.navigateTo({
+        url: '/pages/rank/index',
+        fail: (res) => {
+          console.log(res);
+        }
+      });
     }
   },
   gotoQuizHistoryPage() {
-    console.log('gotoQuizHistoryPage')
     wx.navigateTo({
       url: '/pages/quizHistory/index',
       fail: (res) => {
@@ -88,7 +92,7 @@ Page({
     });
   },
   switchIsEnd() {
-    
+
     wx.cloud.database().collection('const').where({ _id: 'isEnd' }).update({
       data: {
         value: !this.data.isEnd,
